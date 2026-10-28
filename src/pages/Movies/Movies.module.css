@@ -1,0 +1,67 @@
+.page {
+  padding-top: 110px;
+  padding-bottom: 60px;
+}
+
+.featured {
+  min-height: 420px;
+  background: #181818;
+}
+
+.featuredImage {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.featuredOverlay {
+  position: relative;
+  min-height: 420px;
+
+  display: flex;
+  align-items: end;
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.7) 40%,
+      rgba(0, 0, 0, 0.15) 100%
+    ),
+    linear-gradient(
+      to top,
+      rgba(20, 20, 20, 0.95),
+      transparent 45%
+    );
+}
+@media (max-width: 768px) {
+  .featured {
+    min-height: 360px;
+  }
+
+  .featuredOverlay {
+    min-height: 360px;
+
+    background:
+      linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 0, 0, 0.5) 70%,
+        rgba(0, 0, 0, 0.1) 100%
+      );
+  }
+}
+@media (max-width: 576px) {
+  .featured {
+    min-height: 330px;
+  }
+
+  .featuredOverlay {
+    min-height: 330px;
+  }
+}

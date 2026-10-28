@@ -1,0 +1,34 @@
+.page {
+  padding-top: 110px;
+  padding-bottom: 60px;
+}
+
+.listCard {
+  position: relative;
+}
+
+.removeButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  z-index: 5;
+
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.listCard:hover .removeButton {
+  opacity: 1;
+}
+
+.removeButton:hover {
+  transform: scale(1.1);
+}

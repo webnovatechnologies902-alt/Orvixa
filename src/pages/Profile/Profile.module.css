@@ -1,0 +1,57 @@
+.page {
+  padding-top: 120px;
+  padding-bottom: 70px;
+}
+
+.avatar {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: #333;
+
+  font-size: 42px;
+  color: #aaa;
+
+  border: 2px solid #555;
+}
+
+.card {
+  background: #181818;
+  border: 1px solid #292929;
+}
+
+.setting {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px;
+
+  border: none;
+  border-bottom: 1px solid #292929;
+
+  background: transparent;
+  color: #fff;
+
+  text-align: left;
+}
+
+.setting:last-child {
+  border-bottom: none;
+}
+
+.setting:hover {
+  background: #222;
+}
+
+.setting i {
+  font-size: 17px;
+}

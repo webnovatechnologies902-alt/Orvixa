@@ -1,7 +1,7 @@
 import Navbar from "../../components/Navbar/Navbar";
 import MovieRow from "../../components/MovieRow/MovieRow";
-
-import movies from "../../data/movie.js"
+import ContinueWatching from "../../components/ContinueWatching/ContinueWatching";
+import movies from "../../data/movie.js";
 
 import styles from "./Home.module.css";
 
@@ -24,37 +24,24 @@ const Home = () => {
           </div>
 
           <p className={styles.description}>
-            When a young boy disappears, his friends, family and a local
-            police chief begin a desperate search. Their journey leads them
-            into a mysterious world filled with strange secrets.
+            When a young boy disappears, his friends, family and a local police
+            chief begin a desperate search. Their journey leads them into a
+            mysterious world filled with strange secrets.
           </p>
 
           <div className={styles.buttons}>
-            <button className={styles.playButton}>
-              ▶ Play
-            </button>
+            <button className={styles.playButton}>▶ Play</button>
 
-            <button className={styles.infoButton}>
-              ⓘ More Info
-            </button>
+            <button className={styles.infoButton}>ⓘ More Info</button>
           </div>
         </div>
       </section>
 
-      <MovieRow
-        title="Trending Now"
-        movies={movies}
-      />
+      <ContinueWatching movies={movies} />
 
-      <MovieRow
-        title="Popular Movies"
-        movies={movies}
-      />
-
-      <MovieRow
-        title="Top Rated"
-        movies={movies}
-      />
+      <MovieRow title="Trending Now" movies={movies} />
+      <MovieRow title="Popular Movies" movies={movies} />
+      <MovieRow title="Top Rated" movies={movies} />
     </main>
   );
 };

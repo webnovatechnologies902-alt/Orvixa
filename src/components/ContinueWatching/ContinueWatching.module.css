@@ -1,0 +1,69 @@
+.section {
+  background: #141414;
+  color: #fff;
+}
+
+.card {
+  background: #181818;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.image {
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+
+.playButton {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover .playButton {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.progress {
+  height: 4px;
+  background: #555;
+}
+
+.progressBar {
+  height: 100%;
+  background: #e50914;
+}
+
+.viewAll {
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.viewAll:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+  .card {
+    flex: 0 0 250px;
+  }
+
+  .image {
+    height: 140px;
+  }
+}

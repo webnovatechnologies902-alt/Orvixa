@@ -1,0 +1,55 @@
+.searchSection {
+  padding-top: 100px !important;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  background: #222;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 4px 16px;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.searchBox:focus-within {
+  border-color: #aaa;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+
+.searchBox > i {
+  color: #aaa;
+  font-size: 20px;
+}
+
+.searchBox input {
+  background: transparent;
+  border: none;
+  color: white;
+  box-shadow: none !important;
+  padding: 12px 0;
+}
+
+.searchBox input::placeholder {
+  color: #777;
+}
+
+.searchBox input:focus {
+  background: transparent;
+  color: white;
+}
+
+.clearButton {
+  border: none;
+  background: transparent;
+  color: #aaa;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.clearButton:hover {
+  color: white;
+}
