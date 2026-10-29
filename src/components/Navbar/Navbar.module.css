@@ -1,16 +1,21 @@
+/* =========================
+   Navbar (desktop)
+========================= */
+
 .navbar {
   position: fixed;
-
   top: 0;
   left: 0;
   right: 0;
 
   height: 72px;
-
   padding: 0 48px;
 
-  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
+  z-index: 1000;
   color: white;
 
   background: linear-gradient(
@@ -21,26 +26,37 @@
   );
 }
 
+.left {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
 .logo {
   color: #e50914;
-
   font-size: 32px;
   font-weight: 700;
-
   letter-spacing: -1.5px;
-
+  text-decoration: none;
   cursor: pointer;
+}
+
+.logo:hover {
+  color: #e50914;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
 .navLink {
   color: #fff;
-
   text-decoration: none;
-
   font-size: 15px;
   font-weight: 500;
   white-space: nowrap;
-
   transition: color 0.2s ease;
 }
 
@@ -48,17 +64,23 @@
   color: #aaa;
 }
 
+.right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 .iconButton {
+  display: inline-flex;
+  align-items: center;
+
   border: none;
-
   background: transparent;
-
-  color: white;
-
-  font-size: 19px;
-
   padding: 0;
 
+  color: white;
+  font-size: 19px;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -68,15 +90,11 @@
 
 .kidsButton {
   border: none;
-
   background: transparent;
-
-  color: white;
-
-  font-size: 15px;
-
   padding: 0;
 
+  color: white;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -84,116 +102,190 @@
   color: #aaa;
 }
 
-.profileButton {
-  border: none;
-
-  background: transparent;
+.profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 
   color: white;
-
   font-size: 22px;
-
-  padding: 0;
-
-  cursor: pointer;
+  text-decoration: none;
 }
 
-.profileButton i:last-child {
+.profile:hover {
+  color: #ccc;
+}
+
+.arrow {
   font-size: 11px;
 }
 
+/* Keyboard focus */
+.navLink:focus-visible,
+.iconButton:focus-visible,
+.kidsButton:focus-visible,
+.profile:focus-visible,
+.logo:focus-visible,
+.menuButton:focus-visible,
+.closeButton:focus-visible,
+.sidebarLink:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
 /* =========================
-   Mobile Navigation
+   Hamburger (hidden on desktop)
 ========================= */
 
-.mobileMenuButton {
+.menuButton {
   display: none;
+  align-items: center;
+
   border: none;
   background: transparent;
-  color: white;
-  font-size: 28px;
   padding: 0;
+
+  color: white;
+  font-size: 30px;
   cursor: pointer;
 }
 
-.mobileMenuButton:hover {
+.menuButton:hover {
   color: #ccc;
 }
 
-.mobileMenu {
-  position: absolute;
-  top: 72px;
-  left: 0;
-  right: 0;
+/* =========================
+   Mobile sidebar
+========================= */
 
-  background: rgba(15, 15, 15, 0.98);
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.65);
 
-  padding: 10px 20px 20px;
-
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-
-  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
-.mobileNavLink {
-  display: block;
-  width: 100%;
+.backdropOpen {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
 
-  padding: 14px 5px;
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1002;
+
+  width: min(80vw, 320px);
+  padding: 0 24px 24px;
+  overflow-y: auto;
+
+  background: #141414;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: -10px 0 25px rgba(0, 0, 0, 0.5);
+
+  /* visibility keeps hidden links out of the Tab order */
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform 0.3s ease;
+}
+
+.sidebarHeader {
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+
+  border: none;
+  background: transparent;
+  padding: 0;
+
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  color: #ccc;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  padding: 14px 4px;
 
   border: none;
   background: transparent;
 
   color: white;
-  text-decoration: none;
-
-  text-align: left;
-
+  font-family: inherit;
   font-size: 16px;
   font-weight: 500;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
 
   transition: color 0.2s ease;
 }
 
-.mobileNavLink:hover {
+.sidebarLink:hover {
   color: #aaa;
 }
 
-.mobileDivider {
+.divider {
   height: 1px;
   margin: 8px 0;
-
   background: rgba(255, 255, 255, 0.12);
 }
 
-
 /* =========================
-   Tablet / Mobile
+   Tablet / Mobile  (900px and below)
 ========================= */
 
 @media (max-width: 900px) {
-  .desktopNav {
-    display: none !important;
-  }
-
-  .desktopRight {
-    display: none !important;
-  }
-
-  .mobileMenuButton {
-    display: block;
-  }
-
   .navbar {
     padding: 0 25px;
   }
+
+  .desktopNav,
+  .right {
+    display: none;
+  }
+
+  .menuButton {
+    display: inline-flex;
+  }
 }
 
-
 /* =========================
-   Small Mobile
+   Small mobile  (576px and below)
 ========================= */
 
 @media (max-width: 576px) {
@@ -206,225 +298,29 @@
     font-size: 27px;
   }
 
-  .mobileMenu {
-    top: 64px;
-  }
-}
-
-@media (max-width: 900px) {
-  .mobileMenu {
-    position: fixed;
-    max-height: calc(100vh - 72px);
-    overflow-y: auto;
-    z-index: 1001;
-  }
-}
-
-@media (max-width: 576px) {
-  .mobileMenu {
-    max-height: calc(100vh - 64px);
-  }
-}
-
-@media (max-width: 576px) {
-  .navbar {
+  .sidebarHeader {
     height: 64px;
-    padding: 0 18px;
   }
+}
 
-  .logo {
-    font-size: 27px;
-  }
+/* =========================
+   Desktop: sidebar never shows
+========================= */
 
-  .mobileMenu {
-    top: 64px;
-  }
-
-  .kidsButton {
+@media (min-width: 901px) {
+  .sidebar,
+  .backdrop {
     display: none;
   }
 }
-/* =========================
-   Mobile Menu
-========================= */
-
-.mobileMenuButton {
-  display: none;
-
-  border: none;
-  background: transparent;
-
-  color: white;
-
-  font-size: 28px;
-
-  padding: 0;
-
-  cursor: pointer;
-}
-
-.mobileMenuButton:hover {
-  color: #ccc;
-}
-
-.mobileMenu {
-  position: absolute;
-
-  top: 72px;
-  left: 0;
-  right: 0;
-
-  background: rgba(15, 15, 15, 0.98);
-
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-
-  padding: 10px 20px 20px;
-
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-
-  z-index: 999;
-}
-
-.mobileNavLink {
-  display: block;
-
-  width: 100%;
-
-  padding: 14px 5px;
-
-  border: none;
-
-  background: transparent;
-
-  color: white;
-
-  text-decoration: none;
-
-  text-align: left;
-
-  font-size: 16px;
-  font-weight: 500;
-
-  transition: color 0.2s ease;
-}
-
-.mobileNavLink:hover {
-  color: #aaa;
-}
-
-.mobileDivider {
-  height: 1px;
-
-  margin: 8px 0;
-
-  background: rgba(255, 255, 255, 0.12);
-}
 
 /* =========================
-   Mobile Navigation
+   Reduced motion
 ========================= */
 
-.mobileMenuButton {
-  display: none;
-  border: none;
-  background: transparent;
-  color: white;
-  font-size: 28px;
-  padding: 0;
-  cursor: pointer;
-}
-
-.mobileMenuButton:hover {
-  color: #ccc;
-}
-
-.mobileMenu {
-  position: absolute;
-  top: 72px;
-  left: 0;
-  right: 0;
-
-  background: rgba(15, 15, 15, 0.98);
-
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-
-  padding: 10px 20px 20px;
-
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-
-  z-index: 999;
-}
-
-.mobileNavLink {
-  display: block;
-  width: 100%;
-
-  padding: 14px 5px;
-
-  border: none;
-  background: transparent;
-
-  color: white;
-  text-decoration: none;
-
-  text-align: left;
-
-  font-size: 16px;
-  font-weight: 500;
-
-  transition: color 0.2s ease;
-}
-
-.mobileNavLink:hover {
-  color: #aaa;
-}
-
-.mobileDivider {
-  height: 1px;
-  margin: 8px 0;
-
-  background: rgba(255, 255, 255, 0.12);
-}
-
-
-/* =========================
-   Tablet / Mobile
-========================= */
-
-@media (max-width: 900px) {
-  .desktopNav {
-    display: none !important;
-  }
-
-  .desktopRight {
-    display: none !important;
-  }
-
-  .mobileMenuButton {
-    display: block;
-  }
-
-  .navbar {
-    padding: 0 25px;
-  }
-}
-
-
-/* =========================
-   Small Mobile
-========================= */
-
-@media (max-width: 576px) {
-  .navbar {
-    height: 64px;
-    padding: 0 18px;
-  }
-
-  .logo {
-    font-size: 27px;
-  }
-
-  .mobileMenu {
-    top: 64px;
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .backdrop {
+    transition: none;
   }
 }
