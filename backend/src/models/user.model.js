@@ -41,6 +41,29 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+
+    tokenVersion: {
+      type: Number,
+      default: 0,
+    },
+
+    preferences: {
+      language: {
+        type: String,
+        default: "English",
+        trim: true,
+        maxlength: 30,
+      },
+      playbackQuality: {
+        type: String,
+        enum: ["auto", "low", "medium", "high"],
+        default: "auto",
+      },
+      notificationsEnabled: {
+        type: Boolean,
+        default: true,
+      },
+    },
   },
   {
     timestamps: true,

@@ -2,7 +2,7 @@ import { useRef } from "react";
 import MovieCard from "../MovieCard/MovieCard";
 import styles from "./MovieRow.module.css";
 
-const MovieRow = ({ title, movies }) => {
+const MovieRow = ({ title, movies, onPlay, onAdd, onLike }) => {
   const rowRef = useRef(null);
 
   const scroll = (direction) => {
@@ -34,6 +34,9 @@ const MovieRow = ({ title, movies }) => {
             <MovieCard
               key={movie.id}
               movie={movie}
+              onPlay={onPlay}
+              onAdd={onAdd}
+              onLike={onLike}
             />
           ))}
         </div>

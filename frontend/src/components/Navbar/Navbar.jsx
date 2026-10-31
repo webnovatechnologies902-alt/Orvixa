@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "../../auth/useAuth";
 import styles from "./Navbar.module.css";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "TV Shows", href: "/tv-shows" },
   { label: "Movies", href: "/movies" },
-  { label: "New & Popular", href: "/new-and-popular" }, // change to your real route
+  { label: "New & Popular", href: "/search?sort=trending" },
   { label: "My List", href: "/my-list" },
 ];
 
 const Navbar = () => {
+  const { isAuthenticated } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const closeMenu = () => setMenuOpen(false);
@@ -82,7 +84,7 @@ const Navbar = () => {
             <i className="bi bi-bell"></i>
           </button>
 
-          <a href="/profile" className={styles.profile} aria-label="Profile">
+          <a href={isAuthenticated ? "/profile" : "/login"} className={styles.profile} aria-label={isAuthenticated ? "Profile" : "Sign in"}>
             <i className="bi bi-person-circle"></i>
             <i className={`bi bi-chevron-down ${styles.arrow}`}></i>
           </a>
@@ -165,9 +167,9 @@ const Navbar = () => {
             Kids
           </button>
 
-          <a href="/profile" className={styles.sidebarLink} onClick={closeMenu}>
+          <a href={isAuthenticated ? "/profile" : "/login"} className={styles.sidebarLink} onClick={closeMenu}>
             <i className="bi bi-person-circle"></i>
-            Profile
+            {isAuthenticated ? "Profile" : "Sign in"}
           </a>
         </nav>
       </aside>

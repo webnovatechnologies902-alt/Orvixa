@@ -2,7 +2,13 @@ import { Link } from "react-router-dom";
 
 import styles from "./MovieCard.module.css";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, onPlay, onAdd, onLike }) => {
+  const runAction = (event, action) => {
+    event.preventDefault();
+    event.stopPropagation();
+    action?.(movie);
+  };
+
   return (
     <div className={styles.card}>
       <Link
@@ -13,6 +19,8 @@ const MovieCard = ({ movie }) => {
           src={movie.image}
           alt={movie.title}
           className={styles.image}
+          loading="lazy"
+          decoding="async"
         />
 
         <div className={styles.overlay}>
@@ -21,21 +29,24 @@ const MovieCard = ({ movie }) => {
           <div className={styles.actions}>
             <button
               type="button"
-              onClick={(event) => event.preventDefault()}
+              aria-label={`Play ${movie.title}`}
+              onClick={(event) => runAction(event, onPlay)}
             >
               <i className="bi bi-play-fill"></i>
             </button>
 
             <button
               type="button"
-              onClick={(event) => event.preventDefault()}
+              aria-label={`Add ${movie.title} to My List`}
+              onClick={(event) => runAction(event, onAdd)}
             >
               <i className="bi bi-plus-lg"></i>
             </button>
 
             <button
               type="button"
-              onClick={(event) => event.preventDefault()}
+              aria-label={`Like ${movie.title}`}
+              onClick={(event) => runAction(event, onLike)}
             >
               <i className="bi bi-hand-thumbs-up"></i>
             </button>

@@ -1,40 +1,47 @@
-const bcrypt = require("bcryptjs");
-
 const User = require("../models/user.model");
 const ApiError = require("../utils/ApiError");
+const bcrypt = require("bcryptjs");
+const { toUserResponse } = require("./auth.service");
 
-const registerUser = async ({ name, email, password }) => {
-  // Check if user already exists
-  const existingUser = await User.findOne({ email });
+const getProfile = (user) => toUserResponse(user);
 
-  if (existingUser) {
-    throw new ApiError(409, "Email is already registered");
+const updateProfile = async (user, updates) => {
+  if (updates.email && updates.email !== user.email) {
+    const existingUser = await User.findOne({ email: updates.email });
+    if (existingUser) {
+      throw new ApiError(409, "Email is already registered");
+    }
   }
 
-  // Hash password
-  const hashedPassword = await bcrypt.hash(password, 12);
+  Object.assign(user, updates);
+  await user.save();
+  return toUserResponse(user);
+};
 
-  // Create user
-  const user = await User.create({
-    name,
-    email,
-    password: hashedPassword,
-  });
+const updatePassword = async (user, { currentPassword, newPassword }) => {
+  const userWithPassword = await User.findById(user._id).select("+password");
 
-  // Never return password
-  const userResponse = {
-    id: user._id,
-    name: user.name,
-    email: user.email,
-    avatar: user.avatar,
-    role: user.role,
-    isActive: user.isActive,
-    createdAt: user.createdAt,
-  };
+  if (
+    !userWithPassword ||
+    !(await bcrypt.compare(currentPassword, userWithPassword.password))
+  ) {
+    throw new ApiError(400, "Current password is incorrect");
+  }
 
-  return userResponse;
+  userWithPassword.password = await bcrypt.hash(newPassword, 12);
+  userWithPassword.tokenVersion += 1;
+  await userWithPassword.save();
+};
+
+const updatePreferences = async (user, preferences) => {
+  Object.assign(user.preferences, preferences);
+  await user.save();
+  return user.preferences;
 };
 
 module.exports = {
-  registerUser,
+  getProfile,
+  updateProfile,
+  updatePassword,
+  updatePreferences,
 };
